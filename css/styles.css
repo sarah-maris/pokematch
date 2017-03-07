@@ -1,0 +1,83 @@
+*,
+*::before,
+*::after {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#game-board {}
+
+.card {
+  position: relative;
+  float: left;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  margin: 5px;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.card-front {
+  background-color: #f00;
+  border: 10px solid #000;
+}
+
+.card-back {
+  background-color: #000;
+  border: 10px solid #f00;
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+
+.card-image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+  width: 100%;
+  padding: 5%;
+}
+
+
+/* hover effect */
+
+.card:hover .card-front {
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+
+.card:hover .card-back {
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+}
+
+
+/* click effect */
+
+.card.flipped .card-front {
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+
+.card.flipped .card-back {
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+}
+
+
+/* https://davidwalsh.name/css-flip
+http://codepen.io/zerospree/pen/bNWbvW
+http://callmenick.com/post/css-transitions-transforms-animations-flipping-card */
