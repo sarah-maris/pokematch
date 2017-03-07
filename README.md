@@ -17,11 +17,14 @@ The game board consists of sixteen cards arranged randomly in a grid. The deck i
 * If the cards do not match, both cards are returned to their initial hidden state
 * The game ends once all cards have been correctly matched.
 
-##### Sources:
+##### Resources used to create the game:
 
 ###### Images:
 * https://www.vecteezy.com/vector-art/117920-pokemon-ball-vector
 * https://www.vecteezy.com/vector-art/117861-free-pokemon-vector
+
+###### Array shuffle:
+* http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 
 ###### Card Flipping CSS:
 * https://davidwalsh.name/css-flip
