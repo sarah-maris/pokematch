@@ -1,5 +1,5 @@
-let click1 = null;
-let click2 = null;
+let click1 = {};
+let click2 = {};
 
 function makeCardArray(data) {
   let array = [];
@@ -37,13 +37,49 @@ function displayCards(cardArray) {
     let cardID = '#' + card.id;
     $('#game-board').append(card.html);
     $(cardID).click(function() {
-      $(cardID).toggleClass('flipped');
-      console.log("click", card.name)
-    })
+      // TODO: check number of clicks
+      checkCard(card);
+    });
   });
 }
 
-function flipCard(card) {
+function checkCard(card) {
+  console.log(click1.name, click2.name)
+  if (click1.name && click2.name) {
+    return;
+  }
+  let cardID = '#' + card.id;
+  if (!click1.name) {
+    click1.name = card.name;
+    click1.id = cardID;
+    $(cardID).addClass('flipped');
+    return;
+  } else if (!click2.name) {
+    click2.name = card.name;
+    click2.id = cardID;
+    $(cardID).addClass('flipped');
+  }
+
+  if (click1.name === click2.name) {
+    // TODO  change background-color
+    // TODO increase score
+    // TODO add function to prevent flipping back (add class and remove class?)
+    console.log("win!", click1.id, click2.id)
+    $(click1.id).unbind('click');
+    $(click2.id).unbind('click');
+    // reset clicks
+    click1.name = null;
+    click2.name = null;
+  } else {
+    //hide cards
+    setTimeout(function() {
+      $(click1.id).removeClass('flipped');
+      $(click2.id).removeClass('flipped');
+      // reset clicks
+      click1.name = null;
+      click2.name = null;
+    }, 600);
+  }
 
 }
 
@@ -74,24 +110,5 @@ displayCards(cardArray);
 
 
 function clickListener() {
-  if (!click1) {
-    this.name = click1;
-    // show card 1
-    return;
-  } else if (!click2) {
-    this.name = click2;
-    // show card 2
-  } else return;
 
-  if (click1 === click2) {
-    // change background-color
-    // increase score
-
-  } else {
-    //hide cards
-
-  }
-  // reset clicks
-  click1 = null;
-  click2 = null;
 }

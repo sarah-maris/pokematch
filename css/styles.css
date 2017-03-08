@@ -85,19 +85,6 @@ body {
 }
 
 
-/* click effect */
-
-.card.effect__click.flipped .card__front {
-  -webkit-transform: rotateY(-180deg);
-  transform: rotateY(-180deg);
-}
-
-.card.effect__click.flipped .card__back {
-  -webkit-transform: rotateY(0);
-  transform: rotateY(0);
-}
-
-
 /* https://davidwalsh.name/css-flip
 http://codepen.io/zerospree/pen/bNWbvW
 http://callmenick.com/post/css-transitions-transforms-animations-flipping-card */
