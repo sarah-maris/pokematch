@@ -34,9 +34,12 @@ function shuffle(array) {
 
 function displayCards(cardArray) {
   cardArray.forEach(function(card) {
-    let cardID = '#' + card.id;
+    //    console.log(card.id)
+    //    let cardID = '#' + card.id;
     $('#game-board').append(card.html);
-    $(cardID).click(function() {
+    //    console.log(card.id)
+    $(card.id).click(function() {
+      console.log("click")
       // TODO: check number of clicks
       checkCard(card);
     });
@@ -44,21 +47,19 @@ function displayCards(cardArray) {
 }
 
 function checkCard(card) {
-  console.log(click1.name, click2.name)
-  if (click1.name && click2.name) {
+  if (card.flipped) {
     return;
   }
-  let cardID = '#' + card.id;
   if (!click1.name) {
     click1.name = card.name;
-    click1.id = cardID;
-    $(cardID).addClass('flipped');
+    click1.id = card.id;
+    $(card.id).addClass('flipped');
     return;
   } else if (!click2.name) {
     click2.name = card.name;
-    click2.id = cardID;
-    $(cardID).addClass('flipped');
-  }
+    click2.id = card.id;
+    $(card.id).addClass('flipped');
+  } else return;
 
   if (click1.name === click2.name) {
     // TODO  change background-color
@@ -84,10 +85,12 @@ function checkCard(card) {
 }
 
 var Card = function(card, num) {
-  this.id = card.id + '-' + num;
+  let cardID = card.id + '-' + num;
+  this.id = '#' + card.id + '-' + num;
   this.image = card.image;
   this.name = card.name;
-  this.html = `<article class="card" id="${this.id}">
+  this.flipped = false;
+  this.html = `<article class="card" id="${cardID}">
       <div class="card-back">
         <img src="images/${this.image}" class="card-image" >
       </div>
