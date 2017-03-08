@@ -5,7 +5,14 @@
   box-sizing: border-box;
 }
 
-#game-board {}
+body {
+  background-color: #3c5aa6;
+}
+
+#game-board {
+  margin: auto;
+  width: 1400px;
+}
 
 .card {
   position: relative;
@@ -30,13 +37,12 @@
 }
 
 .card-front {
-  background-color: #f00;
-  border: 10px solid #000;
+  background-color: #e60012 border: 10px solid #000;
 }
 
 .card-back {
   background-color: #000;
-  border: 10px solid #f00;
+  border: 10px solid #e60012;
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
 }
@@ -52,7 +58,7 @@
 }
 
 
-/* hover effect */
+/* hover effect
 
 .card:hover .card-front {
   -webkit-transform: rotateY(-180deg);
@@ -63,6 +69,7 @@
   -webkit-transform: rotateY(0);
   transform: rotateY(0);
 }
+*/
 
 
 /* click effect */
@@ -73,6 +80,19 @@
 }
 
 .card.flipped .card-back {
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+}
+
+
+/* click effect */
+
+.card.effect__click.flipped .card__front {
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+
+.card.effect__click.flipped .card__back {
   -webkit-transform: rotateY(0);
   transform: rotateY(0);
 }

@@ -1,49 +1,61 @@
-var cards = [{
+var cardData = [{
     name: "Pikachu",
-    image: "pikachu.png"
+    image: "pikachu.png",
+    id: "pikachu"
   },
   {
     name: "Bulbasaur",
-    image: "bulbasaur.png"
+    image: "bulbasaur.png",
+    id: "bulbasaur"
   },
   {
     name: "Charmander",
-    image: "charmander.png"
+    image: "charmander.png",
+    id: "charmander"
   },
   {
     name: "Master Ball",
-    image: "masterball.png"
+    image: "masterball.png",
+    id: "masterball"
   },
   {
     name: "Great Ball",
-    image: "greatball.png"
+    image: "greatball.png",
+    id: "greatball"
   },
   {
     name: "Poke Ball",
-    image: "pokeball.png"
+    image: "pokeball.png",
+    id: "pokeball"
   },
   {
     name: "Premier Ball",
-    image: "premierball.png"
+    image: "premierball.png",
+    id: "premierball"
   },
   {
     name: "Meowth",
-    image: "meowth.png"
+    image: "meowth.png",
+    id: "meowth"
   },
   {
     name: "Snorlax",
-    image: "snorlax.png"
+    image: "snorlax.png",
+    id: "snorlax"
   },
   {
     name: "Wigglypuff",
-    image: "wigglypuff.png"
+    image: "wigglypuff.png",
+    id: "wigglypuff"
   },
   {
     name: "Squirtle",
-    image: "squirtle.png"
+    image: "squirtle.png",
+    id: "squirtle"
   },
   {
     name: "Egg",
-    image: "egg.png"
+    image: "egg.png",
+    id: "egg"
   }
 ];

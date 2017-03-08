@@ -26,6 +26,9 @@ logs
 #project specific files
 ngrok.exe
 .publish/
+
+.jshintrc
+
 # Runtime data
 pids
 *.pid
