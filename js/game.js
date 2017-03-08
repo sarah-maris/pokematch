@@ -34,12 +34,8 @@ function shuffle(array) {
 
 function displayCards(cardArray) {
   cardArray.forEach(function(card) {
-    //    console.log(card.id)
-    //    let cardID = '#' + card.id;
     $('#game-board').append(card.html);
-    //    console.log(card.id)
     $(card.id).click(function() {
-      console.log("click")
       // TODO: check number of clicks
       checkCard(card);
     });
@@ -47,38 +43,33 @@ function displayCards(cardArray) {
 }
 
 function checkCard(card) {
-  if (card.flipped) {
-    return;
-  }
+
   if (!click1.name) {
-    click1.name = card.name;
-    click1.id = card.id;
+    click1 = card;
     $(card.id).addClass('flipped');
     return;
-  } else if (!click2.name) {
-    click2.name = card.name;
-    click2.id = card.id;
+  } else if (!click2.name && click1.id !== card.id) {
+    click2 = card;
     $(card.id).addClass('flipped');
   } else return;
 
   if (click1.name === click2.name) {
     // TODO  change background-color
     // TODO increase score
-    // TODO add function to prevent flipping back (add class and remove class?)
-    console.log("win!", click1.id, click2.id)
+    console.log("win!", click1.id, click2.id); // REMOVE LATER
     $(click1.id).unbind('click');
     $(click2.id).unbind('click');
-    // reset clicks
-    click1.name = null;
-    click2.name = null;
+    // reset click objects
+    click1 = {};
+    click2 = {};
   } else {
     //hide cards
     setTimeout(function() {
       $(click1.id).removeClass('flipped');
       $(click2.id).removeClass('flipped');
-      // reset clicks
-      click1.name = null;
-      click2.name = null;
+      // reset click objects
+      click1 = {};
+      click2 = {};
     }, 600);
   }
 
@@ -89,7 +80,6 @@ var Card = function(card, num) {
   this.id = '#' + card.id + '-' + num;
   this.image = card.image;
   this.name = card.name;
-  this.flipped = false;
   this.html = `<article class="card" id="${cardID}">
       <div class="card-back">
         <img src="images/${this.image}" class="card-image" >
