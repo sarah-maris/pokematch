@@ -1,5 +1,7 @@
 let click1 = {};
 let click2 = {};
+let gameStarted = false;
+let moves = 0;
 
 function makeCardArray(data) {
   let array = [];
@@ -35,8 +37,16 @@ function shuffle(array) {
 function displayCards(cardArray) {
   cardArray.forEach(function(card) {
     $('#game-board').append(card.html);
+    $("#clock").text("0:00");
+    $("#moves").text(moves);
     $(card.id).click(function() {
-      // TODO: check number of clicks
+      if (!gameStarted) {
+        // start timer!
+        gameTimer();
+        gameStarted = true;
+      }
+      moves++;
+      $("#moves").text(moves);
       checkCard(card);
     });
   });
@@ -90,18 +100,32 @@ var Card = function(card, num) {
     </article>`;
 };
 
+
+function gameTimer() {
+
+  let startTime = new Date().getTime();
+
+  // Update the timer every second
+  let timer = setInterval(function() {
+
+    var now = new Date().getTime();
+
+    // Find the time elapsed between now and start
+    var elapsed = now - startTime;
+
+    // Time calculations hours, minutes and seconds
+    let minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    let currentTime = minutes + ':' + seconds;
+
+    $("#clock").text(currentTime);
+  }, 1000);
+
+}
+
 let cardArray = makeCardArray(cardData);
 shuffle(cardArray);
 displayCards(cardArray);
-
-
-//TODO: create click listener to toggle visilbity of image and name.  Must store
-// name of clicked items and trigger match if win and flip (use setTimeout) if no match
-//TODO: create move counter
-
-
-
-
-function clickListener() {
-
-}
