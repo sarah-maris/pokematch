@@ -11,45 +11,34 @@ body {
 
 @font-face {
   font-weight: normal;
-  font-style: normal;  font-family: 'Pokemon Solid';
-  src: url('fonts/Pokemon Solid.eot');
-  src: local('â˜º'), url('fonts/Pokemon Solid.woff') format('woff'), url('fonts/Pokemon Solid.ttf') format('truetype'), url('fonts/Pokemon Solid.svg') format('svg');
+  font-style: normal;  font-family: 'Pokemon Solid';  src: url('fonts/Pokemon Solid.eot');  src: local('â˜º'), url('fonts/Pokemon Solid.woff') format('woff'), url('fonts/Pokemon Solid.ttf') format('truetype'), url('fonts/Pokemon Solid.svg') format('svg');
 }
-
 
 /* header */
 
 .site-title {
-  margin: 60px 0 40px;
-  color: #ffcb05;
-  text-align: center;
-  text-shadow: 6px 6px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -3px 1px 0 #000, 3px 2px 0 #000;
+  margin: 60px 0 40px;  color: #ffcb05;  text-align: center;  text-shadow: 6px 6px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -3px 1px 0 #000, 3px 2px 0 #000;
   letter-spacing: 8px;
   font: 100px/100px 'Pokemon Solid', Helvetica, Arial, Sans-Serif;
-
   -webkit-text-stroke: 5px #3c5aa6;
 }
 
 .tag-line {
-  margin: 20px;
-  color: #3c5aa6;
+  margin: 20px;  color: #3c5aa6;
   text-align: center;
   font: italic bold 40px/40px Helvetica, Arial, Sans-Serif;
 }
 
-
 /* game board and cards */
-
 .board {
   display: flex;
   margin: auto;
   width: 1110px;
-
   flex-wrap: wrap;
 }
 
 .card {
-  position: relative;
+  position: relative;
   float: left;
   margin: 5px;
   width: 175px;
@@ -66,17 +55,12 @@ body {
   height: 100%;
   -webkit-transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
-
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 .card-front {
-  border: 10px solid #2a75bb;
-  background-color: #3c5aa6;
-}
-
-.card-back {
+  border: 10px solid #2a75bb;  background-color: #3c5aa6;}.card-back {
   border: 10px solid #2a75bb;
   background-color: #fff;
   -webkit-transform: rotateY(-180deg);
@@ -94,7 +78,6 @@ body {
 }
 
 /* click effect */
-
 .card.flipped .card-front {
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
@@ -106,27 +89,24 @@ body {
 }
 
 /* footer */
-
 footer {
   display: flex;
   width: 100%;
-
   justify-content: space around;
 }
 
 .timer,
-.counter {
-  width: 50%;
-  text-align: center;
+.counter,
+.wins {
+  width: 50%;  text-align: center;
 }
 
 .info {
   color: #3c5aa6;
   letter-spacing: 5px;
-  font: 36px/42px 'Pokemon Solid', Helvetica, Arial, Sans-Serif;
+  font: 32px/1.25 'Pokemon Solid', Helvetica, Arial, Sans-Serif;
 }
 
 .data {
-  letter-spacing: normal;
-  font: 700 36px/42px Helvetica, Arial, Sans-Serif;
+  letter-spacing: normal;  font: 700  32px/1.25 Helvetica, Arial, Sans-Serif;
 }

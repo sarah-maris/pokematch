@@ -2,6 +2,7 @@ let click1 = {};
 let click2 = {};
 let gameStarted = false;
 let moves = 0;
+let matches = 0;
 
 function makeCardArray(data) {
   let array = [];
@@ -66,7 +67,8 @@ function checkCard(card) {
   if (click1.name === click2.name) {
     // TODO  change background-color
     // TODO increase score
-    console.log("win!", click1.id, click2.id); // REMOVE LATER
+    matches++;
+    $("#matches").text(matches);
     $(click1.id).unbind('click');
     $(click2.id).unbind('click');
     // reset click objects
