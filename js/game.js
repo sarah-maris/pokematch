@@ -1,104 +1,145 @@
-let click1 = {};
-let click2 = {};
+(function() {
+  'use strict';
 
-let timer, moves, matches, gameStarted;
-let level = 'medium';
-const CARDS = cardData.length;
+  let click1 = {},
+    click2 = {},
+    level = "medium",
+    numStars = 3,
+    pairs = 8,
+    gameStarted, matches, moves, timer;
 
-function trimArray(array, level) {
+  // Constuctor to create HTML to display card front and back
+  let Card = function(card, num) {
+    let cardID = card.id + '-' + num;
+    this.id = '#' + card.id + '-' + num;
+    this.image = card.image;
+    this.name = card.name;
+    this.html = `<article class="card" id="${cardID}">
+      <div class="card-back">
+        <img src="images/${this.image}" class="card-image" >
+      </div>
+      <div class="card-front">
+        <img src="images/pokeball.png" class="card-image" >
+      </div>
+    </article>`;
+  };
 
-  // set size of desired array based on level
-  let size = 8;
-  if (level === "hard") {
-    size = 12;
-  } else if (level === "easy") {
-    size = 6;
-  }
-  // trim array as needed
-  while (array.length > size) {
-    let randomIndex = Math.floor(Math.random() * array.length);
-    array.splice(randomIndex, 1);
-  }
-  return array;
-}
+  // set size of card array based on level
+  function trimArray(array, level) {
 
-function makeCardArray(data, level) {
-  let array = [];
-
-  let trimmedData = trimArray(data, level);
-  //create array
-  trimmedData.forEach(function(card) {
-    array.push(new Card(card, 1));
-    array.push(new Card(card, 2));
-  });
-  return array;
-}
-
-/* Shuffle array randomly */
-function shuffle(array) {
-  let currentIndex = array.length,
-    temporaryValue, randomIndex;
-
-  while (0 !== currentIndex) {
-
-    // Choose an element randomly
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // Switch current element and random element
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
-function displayCards(cardArray) {
-  cardArray.forEach(function(card) {
-    $('#game-board').append(card.html);
-    $("#clock").text("0:00");
-    $("#moves").text(moves);
-    $(card.id).click(function() {
-      if (!gameStarted) {
-        // start timer!
-        gameTimer();
-        gameStarted = true;
-      }
-      checkCard(card);
-    });
-  });
-}
-
-function checkCard(card) {
-
-  if (!click1.name) {
-    click1 = card;
-    $(card.id).addClass('flipped');
-    moves++;
-    $("#moves").text(moves);
-    return;
-  } else if (!click2.name && click1.id !== card.id) {
-    click2 = card;
-    $(card.id).addClass('flipped');
-    moves++;
-    $("#moves").text(moves);
-  } else return;
-
-  if (click1.name === click2.name) {
-    matches++;
-    if (matches === 3) {
-      gameOver = true;
-      clearInterval(timer);
-      $('#winModal').show();
+    if (level === "hard") {
+      pairs = 12;
+    } else if (level === "easy") {
+      pairs = 6;
     }
-    $("#matches").text(matches);
+    // trim array as needed
+    while (array.length > pairs) {
+      let randomIndex = Math.floor(Math.random() * array.length);
+      array.splice(randomIndex, 1);
+    }
+    return array;
+  }
+
+  function makeCardArray(data, level) {
+
+    let array = [];
+
+    // Get the correct sized array for level
+    let trimmedData = trimArray(data, level);
+
+    // Add two of each card to the array
+    trimmedData.forEach(function(card) {
+      array.push(new Card(card, 1));
+      array.push(new Card(card, 2));
+    });
+    return array;
+  }
+
+  function shuffle(array) {
+    let currentIndex = array.length,
+      temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+
+      // Choose an element randomly
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // Switch current element and random element
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+  function displayCards(cardArray) {
+    cardArray.forEach(function(card) {
+
+      // Add cards to game board
+      $('#game-board').append(card.html);
+
+      // Add click listeners
+      $(card.id).click(function() {
+
+        // Start timer on first click
+        if (!gameStarted) {
+          // start timer!
+          gameTimer();
+          gameStarted = true;
+        }
+
+        // Check for match when clicked
+        checkMatch(card);
+      });
+    });
+  }
+
+  function checkMatch(card) {
+
+    if (!click1.name) {
+      click1 = card;
+      $(card.id).addClass('flipped');
+      return;
+
+      // For second card, check if its a different card
+    } else if (!click2.name && click1.id !== card.id) {
+      click2 = card;
+      $(card.id).addClass('flipped');
+
+      // Update move count
+      moves++;
+      $("#moves").text(moves);
+
+      checkStars();
+    } else return;
+
+    if (click1.name === click2.name) {
+      foundMatch();
+    } else {
+      hideCards();
+    }
+
+  }
+
+  function foundMatch() {
+
+    matches++;
+
+    if (matches === 3) {
+      gameOver();
+    }
+
+    // Unbind click functions and reset click objects
     $(click1.id).unbind('click');
     $(click2.id).unbind('click');
     // reset click objects
     click1 = {};
     click2 = {};
-  } else {
+  }
+
+  function hideCards() {
     //hide cards
     setTimeout(function() {
       $(click1.id).removeClass('flipped');
@@ -109,97 +150,121 @@ function checkCard(card) {
     }, 600);
   }
 
-}
+  function gameOver() {
+    clearInterval(timer);
 
-var Card = function(card, num) {
-  let cardID = card.id + '-' + num;
-  this.id = '#' + card.id + '-' + num;
-  this.image = card.image;
-  this.name = card.name;
-  this.html = `<article class="card" id="${cardID}">
-      <div class="card-back">
-        <img src="images/${this.image}" class="card-image" >
-      </div>
-      <div class="card-front">
-        <img src="images/pokeball.png" class="card-image" >
-      </div>
-    </article>`;
-};
+    // Pause before shoe modal
+    setTimeout(function() {
+      $('#winModal').show();
+    }, 1500);
 
-
-function gameTimer() {
-
-  let startTime = new Date().getTime();
-
-  // Update the timer every second
-  timer = setInterval(function() {
-
-    var now = new Date().getTime();
-
-    // Find the time elapsed between now and start
-    var elapsed = now - startTime;
-
-    // Time calculations hours, minutes and seconds
-    let minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    let currentTime = minutes + ':' + seconds;
-
-    $(".clock").text(currentTime);
-  }, 1000);
-
-}
-
-function displayStars(num) {
-  let starImage = '<img src="images/rating-star.png">';
-  for (let i = 0; i < num; i++) {
-    $('.stars').append(starImage);
   }
-}
 
-$('#openModal').click(function() {
-  $('#winModal').show();
-});
+  function checkStars() {
+    let currentStars;
 
-$('#winModal .close, #overlay').click(function() {
-  $('#winModal').hide();
-});
+    if (moves >= 14) {
+      console.log("here14")
+      currentStars = 1;
+    } else if (moves >= 10) {
+      console.log("here10")
+      currentStars = 2;
+    } else currentStars = 3;
+    console.log("here3")
+    console.log(moves, numStars, currentStars)
+    if (numStars !== currentStars) {
+      displayStars(currentStars);
+    }
 
-$('.modal').click(function() {
-  $('.modal').hide();
-});
+  }
 
-$('.modal-content').click(function(event) {
-  event.stopPropagation();
-});
+  function gameTimer() {
 
-$('#restart').click(function() {
-  startGame(cardData, level);
-});
-// TODO  change background-color andor oadd star image on match
-// TODO create init function
-// TODO link init function to Restart game
-// TODO Change stars based on num moves
-// TODO Remove open Modal button
-// TODO add use strict
-// TODO add media queries for mobile
-// TODO set game end
+    let startTime = new Date().getTime();
 
-function startGame(cards, level) {
-  gameStarted = false;
-  moves = 0;
-  matches = 0;
-  $('#game-board').empty();
-  $('.stars').empty();
-  $(".clock").text('0:00');
-  $("#moves").text('0');
-  $('#winModal').hide();
-  let cardArray = makeCardArray(cards, level);
-  shuffle(cardArray);
-  displayCards(cardArray);
-  displayStars(3);
-}
+    // Update the timer every second
+    timer = setInterval(function() {
 
-startGame(cardData, "easy");
+      var now = new Date().getTime();
+
+      // Find the time elapsed between now and start
+      var elapsed = now - startTime;
+
+      // Calculate minutes and seconds
+      let minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+      // Add starting 0 if seconds < 10
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+
+      let currentTime = minutes + ':' + seconds;
+
+      // Update clock on game screen and modal
+      $(".clock").text(currentTime);
+    }, 750);
+
+  }
+
+  // Add stars to game screen and modal
+  function displayStars(num) {
+    let starImage = '<img src="images/rating-star.png">';
+    $('.stars').empty();
+    for (let i = 0; i < num; i++) {
+      $('.stars').append(starImage);
+    }
+  }
+
+  $('#openModal').click(function() {
+    $('#winModal').show();
+  });
+
+  $('#winModal .close, #overlay').click(function() {
+    $('#winModal').hide();
+  });
+
+  $('.modal').click(function() {
+    $('.modal').hide();
+  });
+
+  $('.modal-content').click(function(event) {
+    event.stopPropagation();
+  });
+
+  $('#restart').click(function() {
+    startGame(cardData, level);
+  });
+  // TODO  change background-color andor oadd star image on match
+  // TODO Change stars based on num moves
+  // TODO Remove open Modal button
+  // TODO add use strict
+  // TODO add media queries for mobile
+  // TODO set game end
+
+  function startGame(cards, level) {
+
+    // reset game variables
+    gameStarted = false;
+    moves = 0;
+    matches = 0;
+    level = level;
+
+    // reset HTML
+    $('#game-board').empty();
+
+    $(".clock").text('0:00');
+    $("#moves").text('0');
+    $('#winModal').hide();
+
+    // Get cards and start the game!
+    let cardArray = makeCardArray(cards, level);
+    shuffle(cardArray);
+    displayCards(cardArray);
+    displayStars(3);
+  }
+
+  // Initialze game
+  startGame(cardData, "easy");
+
+})();
