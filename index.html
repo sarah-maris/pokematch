@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="Memory Game Project for Udacity">
-    <meta name="author" content="Sarah Maris ">
-    <title>Memory Game</title>
-      <link href="css/styles.css" rel="stylesheet">
-  </head>
-  <body>
-    <header>
-      <h1 class="site-title">PokéMatch</h1>
-      <h2 class="tag-line">&ldquo;Gotta Match 'Em All!&rdquo;</h2>
-    </header>
-    <section id="game-board" class="board">
-    </section>
-    <footer>
-        <article class="timer">
-          <h3 class="info">Elapsed Time:&nbsp;<span id="clock" class="data"></span></h3>
-        </article>
-        <article class="counter">
-          <h3 class="info">Moves: <span id="moves" class="data"></span></h3>
-        </article>
-        <article class="wins">
-          <h3 class="info">Matches: <span id="matches" class="data"></span></h3>
-        </article>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
-    <script src="js/data.js"></script>
-    <script src="js/game.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Memory Game Project for Udacity">
+  <meta name="author" content="Sarah Maris ">
+  <title>Memory Game</title>
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1 class="site-title">PokéMatch</h1>
+    <h2 class="tag-line">&ldquo;Gotta Match 'Em All!&rdquo;</h2>
+  </header>
+  <section id="game-board" class="board">
+  </section>
+  <footer>
+    <article class="timer">
+      <h3 class="info">Elapsed Time:&nbsp;<span class="clock data"></span></h3>
+    </article>
+    <article class="wins">
+      <h3 class="info">Star Rating</h3>
+      <div class="stars"></div>
+    </article>
+    <article class="counter">
+      <h3 class="info">Moves: <span id="moves" class="data"></span></h3>
+    </article>
+  </footer>
+>
+  <button id="openModal">Open Modal</button>
+
+  <!-- Win Message -->
+  <div id="winModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+      <h2 class="congrats">You got 'em all!!!</h2>
+      <div class="close">&times;</div>
+      <article class="modal-data">
+        <h3 class="info">Star Rating</h3>
+        <div class="stars"></div>
+      </article>
+      <article class="modal-data">
+        <h3 class="info">Elapsed Time</h3>
+        <div class="clock data"></div>
+      </article>
+      <article class="play-again">
+        <p class="win-text">Do you want to play again?</p>
+        <button id="restart">Restart Game</button>
+      </article>
+    </div>
+
+  </div>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+
 </html>

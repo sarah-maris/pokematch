@@ -3,6 +3,9 @@ let click2 = {};
 let gameStarted = false;
 let moves = 0;
 let matches = 0;
+let gameOver = false;
+let timer;
+const CARDS = cardData.length;
 
 function makeCardArray(data) {
   let array = [];
@@ -34,7 +37,6 @@ function shuffle(array) {
   return array;
 }
 
-
 function displayCards(cardArray) {
   cardArray.forEach(function(card) {
     $('#game-board').append(card.html);
@@ -46,8 +48,6 @@ function displayCards(cardArray) {
         gameTimer();
         gameStarted = true;
       }
-      moves++;
-      $("#moves").text(moves);
       checkCard(card);
     });
   });
@@ -58,16 +58,25 @@ function checkCard(card) {
   if (!click1.name) {
     click1 = card;
     $(card.id).addClass('flipped');
+    moves++;
+    $("#moves").text(moves);
     return;
   } else if (!click2.name && click1.id !== card.id) {
     click2 = card;
     $(card.id).addClass('flipped');
+    moves++;
+    $("#moves").text(moves);
   } else return;
 
   if (click1.name === click2.name) {
     // TODO  change background-color
     // TODO increase score
     matches++;
+    if (matches === 3) {
+      gameOver = true;
+      clearInterval(timer);
+      $('#winModal').show();
+    }
     $("#matches").text(matches);
     $(click1.id).unbind('click');
     $(click2.id).unbind('click');
@@ -108,7 +117,7 @@ function gameTimer() {
   let startTime = new Date().getTime();
 
   // Update the timer every second
-  let timer = setInterval(function() {
+  timer = setInterval(function() {
 
     var now = new Date().getTime();
 
@@ -123,11 +132,39 @@ function gameTimer() {
     }
     let currentTime = minutes + ':' + seconds;
 
-    $("#clock").text(currentTime);
+    $(".clock").text(currentTime);
   }, 1000);
 
 }
 
+function displayStars(num) {
+  let starImage = '<img src="images/rating-star.png">';
+  for (let i = 0; i < num; i++) {
+    $('.stars').append(starImage);
+  }
+}
+
+$('#openModal').click(function() {
+  $('#winModal').show();
+});
+
+$('#winModal .close, #overlay').click(function() {
+  $('#winModal').hide();
+});
+
+$('.modal').click(function() {
+  $('.modal').hide();
+});
+
+$('.modal-content').click(function(event) {
+  event.stopPropagation();
+});
+
+// TODO create init function
+// TODO link init function to Restart game
+// TODO Change stars based on num movves
+// TODO Remove open Modal button
 let cardArray = makeCardArray(cardData);
 shuffle(cardArray);
 displayCards(cardArray);
+displayStars(3);

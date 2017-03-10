@@ -1,34 +1,39 @@
 *,
-*::before,
-*::after {
+*::after,
+*::before {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 body {
   background-color: #ff4554;
+  color: #3c5aa6;
+  font: 18px/24px Helvetica, Arial, Sans-Serif;
 }
-
 @font-face {
   font-weight: normal;
-  font-style: normal;  font-family: 'Pokemon Solid';  src: url('fonts/Pokemon Solid.eot');  src: local('â˜º'), url('fonts/Pokemon Solid.woff') format('woff'), url('fonts/Pokemon Solid.ttf') format('truetype'), url('fonts/Pokemon Solid.svg') format('svg');
+  font-style: normal;
+  font-family: 'Pokemon Solid';
+  src: url('fonts/Pokemon Solid.eot');
+  src: local('â˜º'), url('fonts/Pokemon Solid.woff') format('woff'), url('fonts/Pokemon Solid.ttf') format('truetype'), url('fonts/Pokemon Solid.svg') format('svg');
 }
-
 /* header */
-
 .site-title {
-  margin: 60px 0 40px;  color: #ffcb05;  text-align: center;  text-shadow: 6px 6px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -3px 1px 0 #000, 3px 2px 0 #000;
+  margin: 60px 0 40px;
+  color: #ffcb05;
+  text-align: center;
+  text-shadow: 6px 6px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -3px 1px 0 #000, 3px 2px 0 #000;
   letter-spacing: 8px;
   font: 100px/100px 'Pokemon Solid', Helvetica, Arial, Sans-Serif;
   -webkit-text-stroke: 5px #3c5aa6;
 }
 
 .tag-line {
-  margin: 20px;  color: #3c5aa6;
+  margin: 20px;
+  color: #3c5aa6;
   text-align: center;
   font: italic bold 40px/40px Helvetica, Arial, Sans-Serif;
 }
-
 /* game board and cards */
 .board {
   display: flex;
@@ -46,8 +51,8 @@ body {
   text-align: center;
 }
 
-.card-front,
-.card-back {
+.card-back,
+.card-front {
   position: absolute;
   top: 0;
   left: 0;
@@ -60,8 +65,12 @@ body {
 }
 
 .card-front {
-  border: 10px solid #2a75bb;  background-color: #3c5aa6;}.card-back {
-  border: 10px solid #2a75bb;
+  border: 10px solid #2a75bb;
+  background-color: #3c5aa6;
+}
+
+.card-back {
+  border: 10px solid #2a75bb;
   background-color: #fff;
   -webkit-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
@@ -70,13 +79,12 @@ body {
 .card-image {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0;
   display: block;
   margin: auto;
   padding: 5%;
   width: 100%;
 }
-
 /* click effect */
 .card.flipped .card-front {
   -webkit-transform: rotateY(-180deg);
@@ -87,7 +95,6 @@ body {
   -webkit-transform: rotateY(0);
   transform: rotateY(0);
 }
-
 /* footer */
 footer {
   display: flex;
@@ -95,10 +102,11 @@ footer {
   justify-content: space around;
 }
 
-.timer,
 .counter,
+.timer,
 .wins {
-  width: 50%;  text-align: center;
+  width: 50%;
+  text-align: center;
 }
 
 .info {
@@ -108,5 +116,102 @@ footer {
 }
 
 .data {
-  letter-spacing: normal;  font: 700  32px/1.25 Helvetica, Arial, Sans-Serif;
+  letter-spacing: normal;
+  font: 700 32px/1.25 Helvetica, Arial, Sans-Serif;
+}
+/* modal */
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0,0,0);
+  /* Fallback color */
+  background-color: rgba(0,0,0,0.4);
+  /* Black w/ opacity */
+}
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  border: dotted #ff4554 15px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+}
+
+.modal-data {
+  float: left;
+  text-align: center;
+  width: 50%;
+}
+
+.play-again {
+  width: 100%;
+}
+
+.congrats {
+  font: 40px/60px 'Pokemon Solid', Helvetica, Arial, Sans-Serif;
+  color: #ffcb05;
+  margin: 10px;
+  text-align: center;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 2px 0 #000;
+  letter-spacing: 6px;
+  -webkit-text-stroke: 2px #3c5aa6;
+  width: 95%;
+}
+
+.win-text {
+  font: italic 18px/24px Helvetica, Arial, Sans-Serif;
+  text-align: center;
+}
+
+button {
+  background: #ff4554;
+  border: dotted #3c5aa6 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  color: #fff;
+  display: block;
+  font: bold 24px/24px Helvetica, Arial, Sans-Serif;
+  margin: auto;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+button:hover {
+  background: #e60012;
+  text-decoration: none;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  font: bold 24px/24px Helvetica, Arial, Sans-Serif;
+  position: relative;
+  right: 10px;
+}
+
+.close:focus,
+.close:hover {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
