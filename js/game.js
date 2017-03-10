@@ -3,14 +3,34 @@ let click2 = {};
 let gameStarted = false;
 let moves = 0;
 let matches = 0;
-let gameOver = false;
 let timer;
+let level = 'medium';
 const CARDS = cardData.length;
 
-function makeCardArray(data) {
+function trimArray(array, level) {
+  console.log(array)
+  // set size of desired array based on level
+  let size = 8;
+  if (level === "hard") {
+    size = 12;
+  } else if (level === "easy") {
+    size = 6;
+  }
+  // trim array as needed
+  while (array.length > size) {
+    console.log(array);
+    let randomIndex = Math.floor(Math.random() * array.length);
+    array.splice(randomIndex, 1);
+  }
+  return array;
+}
+
+function makeCardArray(data, level) {
   let array = [];
+
+  let trimmedData = trimArray(data, level);
   //create array
-  data.forEach(function(card) {
+  trimmedData.forEach(function(card) {
     array.push(new Card(card, 1));
     array.push(new Card(card, 2));
   });
@@ -69,8 +89,6 @@ function checkCard(card) {
   } else return;
 
   if (click1.name === click2.name) {
-    // TODO  change background-color
-    // TODO increase score
     matches++;
     if (matches === 3) {
       gameOver = true;
@@ -159,12 +177,17 @@ $('.modal').click(function() {
 $('.modal-content').click(function(event) {
   event.stopPropagation();
 });
-
+// TODO  change background-color andor oadd star image on match
 // TODO create init function
 // TODO link init function to Restart game
-// TODO Change stars based on num movves
+// TODO Change stars based on num moves
 // TODO Remove open Modal button
-let cardArray = makeCardArray(cardData);
+// TODO add use strict
+// TODO add media queries for mobile
+// TODO set game end
+
+
+let cardArray = makeCardArray(cardData, level);
 shuffle(cardArray);
 displayCards(cardArray);
 displayStars(3);
