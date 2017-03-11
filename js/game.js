@@ -6,7 +6,7 @@
     level = "medium",
     numStars = 3,
     pairs = 8,
-    gameStarted, matches, moves, timer;
+    gameStarted, matches, moves, timer, twoStar, oneStar;
 
   // Constuctor to create HTML to display card front and back
   let Card = function(card, num) {
@@ -24,14 +24,16 @@
     </article>`;
   };
 
-  // set size of card array based on level
-  function trimArray(array, level) {
+  function setLevel(level) {
+    pairs = gameLevels[level].pairs;
+    twoStar = gameLevels[level].twoStar;
+    oneStar = gameLevels[level].oneStar;
+    $('.board').addClass([level].class);
+  }
 
-    if (level === "hard") {
-      pairs = 12;
-    } else if (level === "easy") {
-      pairs = 6;
-    }
+  // set size of card array based on level
+  function trimArray(array) {
+
     // trim array as needed
     while (array.length > pairs) {
       let randomIndex = Math.floor(Math.random() * array.length);
@@ -162,16 +164,12 @@
 
   function checkStars() {
     let currentStars;
-
-    if (moves >= 14) {
-      console.log("here14")
+    console.log(moves, oneStar, twoStar)
+    if (moves >= oneStar) {
       currentStars = 1;
-    } else if (moves >= 10) {
-      console.log("here10")
+    } else if (moves >= twoStar) {
       currentStars = 2;
     } else currentStars = 3;
-    console.log("here3")
-    console.log(moves, numStars, currentStars)
     if (numStars !== currentStars) {
       displayStars(currentStars);
     }
@@ -236,11 +234,11 @@
     startGame(cardData, level);
   });
   // TODO  change background-color andor oadd star image on match
-  // TODO Change stars based on num moves
   // TODO Remove open Modal button
-  // TODO add use strict
   // TODO add media queries for mobile
   // TODO set game end
+  // TODO add start screen wtih level choice
+  // TODO animoate modal
 
   function startGame(cards, level) {
 
@@ -248,7 +246,7 @@
     gameStarted = false;
     moves = 0;
     matches = 0;
-    level = level;
+    setLevel(level);
 
     // reset HTML
     $('#game-board').empty();

@@ -1,4 +1,4 @@
-var cardData = [{
+let cardData = [{
     name: "Pikachu",
     image: "pikachu.png",
     id: "pikachu"
@@ -59,3 +59,24 @@ var cardData = [{
     id: "egg"
   }
 ];
+
+let gameLevels = {
+  easy: {
+    class: "easy",
+    pairs: 6,
+    twoStar: 6,
+    oneStar: 10
+  },
+  medium: {
+    canvas: "medium",
+    pairs: 8,
+    twoStar: 10,
+    oneStar: 14
+  },
+  hard: {
+    canvas: "hard",
+    pairs: 12,
+    twoStar: 16,
+    oneStar: 24
+  }
+};
