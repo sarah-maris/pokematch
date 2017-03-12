@@ -1,12 +1,26 @@
 PokéMatch Concentration Game
 ======
+![Game in Play](screenshots/game-board.png "Game in play")
+![Game in Play](screenshots/in-play.png "Game in play")
 
 ## Project Purpose:
 This game was built as a Udacity Course project.  The purpose of the project is to demonstrate mastery of  HTML, CSS, and JavaScript.
 
+## How to Load the game
+* Clone the **[repo](https://github.com/sarah-maris/memory-game.git)** and open index.html -- or --
+* Play on GitHub.io: **[PokéMatch Concentration Game](https://sarah-maris.github.io/memory-game/)**
+
 #### How to Play the Game
 
 The game board consists of twelve to twenty-four cards arranged randomly in a grid. The deck is made up of six to twelve pairs of cards, each with different symbols on one side.
+
+At start player chooses a level:
+* "easy" has 6 pairs of cards
+* "medium" has 8 pairs of cards
+* "hard" has 12 pairs of cards
+
+![Start Screen](screenshots/start-screen.png "start screen")
+![Win Screen](screenshots/win-screen.png "win screen")
 
 On each turn:
 * The player flips one card over to reveal its underlying symbol
@@ -15,6 +29,7 @@ On each turn:
 * If the cards do not match, both cards are returned to their initial hidden state
 * The game ends once all cards have been correctly matched.
 
+![Game in Play](screenshots/in-play.png "Game in play")
 #### Special Features
 * Player can choose between "easy", "medium" and "hard" mode
 * The game features a timer to keep track of how long it takes to win
