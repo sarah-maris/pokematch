@@ -16,8 +16,8 @@ On each turn:
 * The game ends once all cards have been correctly matched.
 
 #### Special Features
-* Player can choose between "easy", "medium" and "hard" mode  *(coming soon!)*
-* The game features a timer to keep track of how long it takes to wins
+* Player can choose between "easy", "medium" and "hard" mode
+* The game features a timer to keep track of how long it takes to win
 * The player starts out with a three star rating -- but the rating drops the more moves it take to complete the game
 * When the game ends, a pop-up appears with the elapsed time, final star rating and a restart button
 

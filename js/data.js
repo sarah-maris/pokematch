@@ -68,13 +68,13 @@ let gameLevels = {
     oneStar: 10
   },
   medium: {
-    canvas: "medium",
+    class: "medium",
     pairs: 8,
     twoStar: 10,
     oneStar: 14
   },
   hard: {
-    canvas: "hard",
+    class: "hard",
     pairs: 12,
     twoStar: 16,
     oneStar: 24

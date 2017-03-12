@@ -25,10 +25,12 @@
   };
 
   function setLevel(level) {
+    $('#startModal').hide();
     pairs = gameLevels[level].pairs;
     twoStar = gameLevels[level].twoStar;
     oneStar = gameLevels[level].oneStar;
-    $('.board').addClass([level].class);
+    $('#game-board').removeClass('easy medium hard');
+    $('#game-board').addClass(gameLevels[level].class);
   }
 
   // set size of card array based on level
@@ -129,8 +131,8 @@
 
     matches++;
 
-    if (matches === 3) {
-      gameOver();
+    if (matches === 3) { // CHANGE TO PAIRS WHEN DONE
+      gameOver()
     }
 
     // Unbind click functions and reset click objects
@@ -164,7 +166,6 @@
 
   function checkStars() {
     let currentStars;
-    console.log(moves, oneStar, twoStar)
     if (moves >= oneStar) {
       currentStars = 1;
     } else if (moves >= twoStar) {
@@ -214,12 +215,23 @@
     }
   }
 
+  // Open start modal on load
+  $(window).on('load', function() {
+    $('#startModal').show();
+  });
+
   $('#openModal').click(function() {
+    console.log("here") // REMOVE THIS FOR TESTING ONLY
     $('#winModal').show();
   });
 
-  $('#winModal .close, #overlay').click(function() {
+  // Close modals when click outside modal
+  $('#winModal #close-win, #overlay').click(function() {
     $('#winModal').hide();
+  });
+
+  $('#startModal #close-start, #overlay').click(function() {
+    $('#startModal').hide();
   });
 
   $('.modal').click(function() {
@@ -230,14 +242,25 @@
     event.stopPropagation();
   });
 
+  // Level modals
+  $('#easy-level').click(function() {
+    startGame(cardData, "easy");
+  });
+
+  $('#medium-level').click(function() {
+    startGame(cardData, "medium");
+  });
+
+  $('#hard-level').click(function() {
+    startGame(cardData, "hard");
+  });
+
+  // Restart game
   $('#restart').click(function() {
-    startGame(cardData, level);
+    $('#winModal').hide();
+    $('#startModal').show();
   });
   // TODO  change background-color andor oadd star image on match
-  // TODO Remove open Modal button
-  // TODO add media queries for mobile
-  // TODO set game end
-  // TODO add start screen wtih level choice
   // TODO animoate modal
 
   function startGame(cards, level) {
@@ -262,7 +285,6 @@
     displayStars(3);
   }
 
-  // Initialze game
-  startGame(cardData, "easy");
+
 
 })();

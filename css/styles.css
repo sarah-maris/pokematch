@@ -10,6 +10,7 @@ body {
   color: #3c5aa6;
   font: 18px/24px Helvetica, Arial, Sans-Serif;
 }
+
 @font-face {
   font-weight: normal;
   font-style: normal;
@@ -17,6 +18,7 @@ body {
   src: url('fonts/Pokemon Solid.eot');
   src: local('â˜º'), url('fonts/Pokemon Solid.woff') format('woff'), url('fonts/Pokemon Solid.ttf') format('truetype'), url('fonts/Pokemon Solid.svg') format('svg');
 }
+
 /* header */
 .site-title {
   margin: 60px 0 40px;
@@ -34,12 +36,22 @@ body {
   text-align: center;
   font: italic bold 40px/40px Helvetica, Arial, Sans-Serif;
 }
+
 /* game board and cards */
 .board {
   display: flex;
   margin: auto;
-  width: 1110px;
+  max-width: 1110px;
   flex-wrap: wrap;
+}
+
+.easy,
+.medium {
+  width: 740px;
+}
+
+.hard {
+  max-width: 1110px;
 }
 
 .card {
@@ -85,6 +97,7 @@ body {
   padding: 5%;
   width: 100%;
 }
+
 /* click effect */
 .card.flipped .card-front {
   -webkit-transform: rotateY(-180deg);
@@ -95,17 +108,19 @@ body {
   -webkit-transform: rotateY(0);
   transform: rotateY(0);
 }
+
 /* footer */
 footer {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  justify-content: space around;
+  justify-content: center;
 }
 
 .counter,
 .timer,
-.wins {
-  width: 50%;
+.rating {
+  width: 33%;
   text-align: center;
 }
 
@@ -119,31 +134,37 @@ footer {
   letter-spacing: normal;
   font: 700 32px/1.25 Helvetica, Arial, Sans-Serif;
 }
+
 /* modal */
-/* The Modal (background) */
 .modal {
   display: none;
-  /* Hidden by default */
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Sit on top */
   padding-top: 100px;
-  /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
-  /* Full width */
   height: 100%;
-  /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0,0,0);
-  /* Fallback color */
-  background-color: rgba(0,0,0,0.4);
-  /* Black w/ opacity */
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
-/* Modal Content */
+
+/* modal close Button */
+.close {
+  color: #aaa;
+  font: bold 24px/24px Helvetica, Arial, Sans-Serif;
+  width: 100%;
+  text-align: right;
+}
+
+.close:focus,
+.close:hover {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .modal-content {
   background-color: #fff;
   border: dotted #ff4554 15px;
@@ -175,7 +196,7 @@ footer {
   text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 2px 0 #000;
   letter-spacing: 6px;
   -webkit-text-stroke: 2px #3c5aa6;
-  width: 95%;
+  width: 100%;
 }
 
 .win-text {
@@ -201,17 +222,202 @@ button:hover {
   background: #e60012;
   text-decoration: none;
 }
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  font: bold 24px/24px Helvetica, Arial, Sans-Serif;
-  position: relative;
-  right: 10px;
+
+.level-button {
+  width: 150px;
 }
 
-.close:focus,
-.close:hover {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.site-title.start {
+  margin: 0 0 20px;
+}
+
+.choose {
+  font: 40px/60px 'Pokemon Solid', Helvetica, Arial, Sans-Serif;
+  color: #ffcb05;
+  margin: 10px 0 40px;
+  text-align: center;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 2px 0 #000;
+  letter-spacing: 6px;
+  -webkit-text-stroke: 2px #3c5aa6;
+  width: 100%;
+}
+
+.start {
+  flex-basis: 100%;
+}
+
+@media (max-width: 1200px) {
+  .hard .card {
+    width: 150px;
+    height: 150px;
+  }
+
+  .hard {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hard .card {
+    width: 125px;
+    height: 125px;
+  }
+
+  .hard {
+    max-width: 810px;
+  }
+}
+
+@media (max-width: 880px) {
+  .hard .card {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hard {
+    max-width: 660px;
+  }
+}
+
+@media (max-width: 800px) {
+  .site-title {
+    font-size: 75px;
+    margin: 45px 0 30px;
+  }
+
+  .tag-line {
+    font-size: 30px;
+    margin: 15px;
+  }
+
+  .info {
+    font-size: 28px;
+  }
+
+  .card {
+    width: 150px;
+    height: 150px;
+  }
+
+  .easy,
+  .medium {
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 700px) {
+  .hard {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 660px) {
+  .info {
+    font-size: 24px;
+    letter-spacing: 3px;
+  }
+
+  .data {
+    font-size: 24px;
+  }
+
+  .card {
+    width: 125px;
+    height: 125px;
+  }
+
+  .easy,
+  .medium {
+    max-width: 540px;
+  }
+
+  .timer {
+    order: 1;
+    flex-basis: 50%;
+  }
+
+  .counter {
+    order: 2;
+    flex-basis: 50%;
+  }
+
+  .rating {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  .site-title {
+    font-size: 60px;
+    margin: 25px 0 10px;
+  }
+
+  .tag-line {
+    font-size: 24px;
+    margin: 15px;
+  }
+
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+
+  .easy,
+  .medium {
+    max-width: 440px;
+  }
+}
+
+@media (max-width: 500px) {
+  .site-title {
+    font-size: 60px;
+    margin: 25px 0 10px;
+  }
+
+  .tag-line {
+    font-size: 24px;
+    margin: 15px;
+  }
+
+  .hard .card {
+    width: 75px;
+    height: 75px;
+  }
+
+  .hard {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 450px) {
+  .site-title {
+    font-size: 55px;
+    margin: 25px 0 10px;
+  }
+
+  .tag-line {
+    font-size: 18px;
+    margin: 15px;
+  }
+
+  .card {
+    width: 75px;
+    height: 75px;
+  }
+
+  .easy,
+  .medium {
+    max-width: 340px;
+  }
+
+  .counter,
+  .timer {
+    flex-basis: 100%;
+  }
+
+  .data,
+  .info {
+    font-size: 28px;
+  }
 }
