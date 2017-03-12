@@ -31,14 +31,14 @@ On each turn:
 
 ![Start Screen](screenshots/start-screen.png "start screen")
 
-![Game in Play](screenshots/game-board.png "Game Board") ![Game in Play](screenshots/in-play.png "Game in play")
+![Game in Play](screenshots/game-board.png "Game Board") ![Game in Play](screenshots/play.png "Game in play")
 
 ![Win Screen](screenshots/win-screen.png "win screen")
 
 ### Special Features
 
 - Player can choose between "easy", "medium" and "hard" mode
-- The game features a timer to keep track of how long it takes to win
+- The game features a timer to keep track of how long it takes to win and reports time on win screen
 - The player starts out with a three star rating -- but the rating drops the more moves it take to complete the game
 - When the game ends, a pop-up appears with the elapsed time, final star rating and a restart button
 
