@@ -1,4 +1,4 @@
-let cardData = [{
+const cardData = [{
     name: "Pikachu",
     image: "pikachu.png",
     id: "pikachu"
@@ -60,7 +60,7 @@ let cardData = [{
   }
 ];
 
-let gameLevels = {
+const gameLevels = {
   easy: {
     class: "easy",
     pairs: 6,

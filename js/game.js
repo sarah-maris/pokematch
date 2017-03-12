@@ -1,4 +1,4 @@
-(function() {
+(() => {
   'use strict';
 
   let click1 = {},
@@ -8,43 +8,44 @@
     pairs = 8,
     gameStarted, matches, moves, timer, twoStar, oneStar;
 
-  // Constuctor to create HTML to display card front and back
-  let Card = function(card, num) {
-    let cardID = card.id + '-' + num;
-    this.id = '#' + card.id + '-' + num;
-    this.image = card.image;
-    this.name = card.name;
-    this.html = `<article class="card" id="${cardID}">
-      <div class="card-back">
-        <img src="images/${this.image}" class="card-image" >
-      </div>
-      <div class="card-front">
-        <img src="images/pokeball.png" class="card-image" >
-      </div>
-    </article>`;
-  };
+  class Card {
+    constructor(card, num) {
+      let cardID = card.id + '-' + num;
+      this.id = '#' + card.id + '-' + num;
+      this.image = card.image;
+      this.name = card.name;
+      this.html = `<article class="card" id="${cardID}">
+        <div class="card-back">
+          <img src="images/${this.image}" class="card-image" >
+        </div>
+        <div class="card-front">
+          <img src="images/pokeball.png" class="card-image" >
+        </div>
+      </article>`;
+    }
+  }
 
-  function setLevel(level) {
+  const setLevel = (level) => {
     $('#startModal').hide();
     pairs = gameLevels[level].pairs;
     twoStar = gameLevels[level].twoStar;
     oneStar = gameLevels[level].oneStar;
     $('#game-board').removeClass('easy medium hard');
     $('#game-board').addClass(gameLevels[level].class);
-  }
+  };
 
   // set size of card array based on level
-  function trimArray(array) {
-
+  const trimArray = (array) => {
+    let newArray = array.slice();
     // trim array as needed
-    while (array.length > pairs) {
-      let randomIndex = Math.floor(Math.random() * array.length);
-      array.splice(randomIndex, 1);
+    while (newArray.length > pairs) {
+      let randomIndex = Math.floor(Math.random() * newArray.length);
+      newArray.splice(randomIndex, 1);
     }
-    return array;
-  }
+    return newArray;
+  };
 
-  function makeCardArray(data, level) {
+  const makeCardArray = (data, level) => {
 
     let array = [];
 
@@ -56,10 +57,11 @@
       array.push(new Card(card, 1));
       array.push(new Card(card, 2));
     });
-    return array;
-  }
 
-  function shuffle(array) {
+    return array;
+  };
+
+  const shuffle = (array) => {
     let currentIndex = array.length,
       temporaryValue, randomIndex;
 
@@ -76,9 +78,9 @@
     }
 
     return array;
-  }
+  };
 
-  function displayCards(cardArray) {
+  const displayCards = (cardArray) => {
     cardArray.forEach(function(card) {
 
       // Add cards to game board
@@ -98,9 +100,9 @@
         checkMatch(card);
       });
     });
-  }
+  };
 
-  function checkMatch(card) {
+  const checkMatch = (card) => {
 
     if (!click1.name) {
       click1 = card;
@@ -125,14 +127,13 @@
       hideCards();
     }
 
-  }
+  };
 
-  function foundMatch() {
+  const foundMatch = () => {
 
     matches++;
-
-    if (matches === 3) { // CHANGE TO PAIRS WHEN DONE
-      gameOver()
+    if (matches === pairs) {
+      gameOver();
     }
 
     // Unbind click functions and reset click objects
@@ -141,9 +142,9 @@
     // reset click objects
     click1 = {};
     click2 = {};
-  }
+  };
 
-  function hideCards() {
+  const hideCards = () => {
     //hide cards
     setTimeout(function() {
       $(click1.id).removeClass('flipped');
@@ -152,19 +153,19 @@
       click1 = {};
       click2 = {};
     }, 600);
-  }
+  };
 
-  function gameOver() {
+  const gameOver = () => {
     clearInterval(timer);
 
     // Pause before shoe modal
     setTimeout(function() {
       $('#winModal').show();
-    }, 1500);
+    }, 500);
 
-  }
+  };
 
-  function checkStars() {
+  const checkStars = () => {
     let currentStars;
     if (moves >= oneStar) {
       currentStars = 1;
@@ -175,9 +176,9 @@
       displayStars(currentStars);
     }
 
-  }
+  };
 
-  function gameTimer() {
+  const gameTimer = () => {
 
     let startTime = new Date().getTime();
 
@@ -204,16 +205,16 @@
       $(".clock").text(currentTime);
     }, 750);
 
-  }
+  };
 
   // Add stars to game screen and modal
-  function displayStars(num) {
-    let starImage = '<img src="images/rating-star.png">';
+  const displayStars = (num) => {
+    const starImage = '<img src="images/rating-star.png">';
     $('.stars').empty();
     for (let i = 0; i < num; i++) {
       $('.stars').append(starImage);
     }
-  }
+  };
 
   // Open start modal on load
   $(window).on('load', function() {
@@ -221,7 +222,6 @@
   });
 
   $('#openModal').click(function() {
-    console.log("here") // REMOVE THIS FOR TESTING ONLY
     $('#winModal').show();
   });
 
@@ -260,10 +260,8 @@
     $('#winModal').hide();
     $('#startModal').show();
   });
-  // TODO  change background-color andor oadd star image on match
-  // TODO animoate modal
 
-  function startGame(cards, level) {
+  const startGame = (cards, level) => {
 
     // reset game variables
     gameStarted = false;
@@ -279,12 +277,11 @@
     $('#winModal').hide();
 
     // Get cards and start the game!
-    let cardArray = makeCardArray(cards, level);
+    let cardArray = makeCardArray(cardData, level);
+
     shuffle(cardArray);
     displayCards(cardArray);
     displayStars(3);
-  }
-
-
+  };
 
 })();
