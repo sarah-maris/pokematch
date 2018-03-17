@@ -19,14 +19,14 @@
       this.id = "#" + card.id + "-" + num;
       this.image = card.image;
       this.name = card.name;
-      this.html = `<article class="card" id="${cardID}">
+      this.html = `<div class="card" id="${cardID}">
         <div class="card-back">
           <img src="images/${this.image}" class="card-image" >
         </div>
         <div class="card-front">
           <img src="images/pokeball.png" class="card-image" >
         </div>
-      </article>`;
+      </div>`;
     }
   }
 
