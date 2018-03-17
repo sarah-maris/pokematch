@@ -1,4 +1,5 @@
-const cardData = [{
+const cardData = [
+  {
     name: "Pikachu",
     image: "pikachu.png",
     id: "pikachu"
