@@ -7,7 +7,7 @@ This game was built as a Udacity Course project. The purpose of the project is t
 ## How to Load the game
 
 - Clone the **[repo](https://github.com/sarah-maris/memory-game.git)** and open index.html -- or --
-- Play on GitHub.io: **[PokéMatch Concentration Game](https://sarah-maris.github.io/memory-game/)**
+- Play on GitHub.io: **[PokéMatch Concentration Game](https://sarah-maris.github.io/pokematch/)**
 
 ### How to Play the Game
 
